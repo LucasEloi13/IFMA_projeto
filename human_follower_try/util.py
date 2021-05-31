@@ -6,7 +6,11 @@ import os, time
 m1_1 = 17
 m1_2 = 6
 m2_1 = 27 
-m2_2 = 23 
+m2_2 = 23
+
+led_Amarelo = 16
+led_Vermelho = 21
+led_Verde = 20
 
 
 def init_gpio():
@@ -15,7 +19,16 @@ def init_gpio():
     GPIO.setup(m1_2,GPIO.OUT)
     GPIO.setup(m2_1,GPIO.OUT)
     GPIO.setup(m2_2,GPIO.OUT)
+    
+    GPIO.setup(led_Amarelo, GPIO.OUT)
+    GPIO.setup(led_Verde, GPIO.OUT)
+    GPIO.setup(led_Vermelho, GPIO.OUT)
 
+def red_light(status):
+    if status == "OFF":
+        GPIO.output(led_Vermelho, False)
+    if status == "ON":
+        GPIO.output(led_Vermelho, True)
 
 def back():
     GPIO.output(m1_1, False)
