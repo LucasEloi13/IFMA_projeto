@@ -1,7 +1,9 @@
 import re
 import cv2
 import util as ut
+import streaming
 import numpy as np
+import pyshine as ps
 import tf_func as tff
 import RPi.GPIO as GPIO
 import tflite_runtime.interpreter as tflite
@@ -22,7 +24,7 @@ GPIO.setup(19, GPIO.OUT)
 pin18 = GPIO.PWM(18, 100)   
 pin19 = GPIO.PWM(19, 100) 
 
-val=100     #VELOCIDADE DO MOTOR
+val=70     #VELOCIDADE DO MOTOR
 pin18.start(val)              
 pin19.start(val)
 
@@ -51,12 +53,15 @@ def track_person(result, labels):
                 Ym = int((y1+y2)/2)      
                 mid = (Xm, Ym)
                 
-                x_tolerance1 = 240
+                x_tolerance1 = 220
                 x_tolerance2 = 400
-                y_max = (CAMERA_HEIGHT - 80)
+                y_max = (CAMERA_HEIGHT)
                 
-                if y2 < y_max:
+                print(y2)
+                
+                if y2 != 0:
                     ut.forward()
+                    print('forward')
                     
                     if Xm < x_tolerance1:
                         deviation = Xm
@@ -64,8 +69,8 @@ def track_person(result, labels):
                         print(delay)
                         
                         ut.left()
-                        sleep(delay)
-                        ut.stop()
+                        #sleep(delay)
+                        #ut.stop()
                     
                     elif Xm > x_tolerance2:
                         deviation = Xm - x_tolerance2
@@ -73,8 +78,8 @@ def track_person(result, labels):
                         print(delay)
                         
                         ut.right()
-                        sleep(delay)
-                        ut.stop()
+                        #sleep(delay)
+                        #ut.stop()
                     
                     ut.red_light('ON')
                 
@@ -151,10 +156,13 @@ if __name__ == "__main__":
     height = input_shape[1]
     width = input_shape[2]
 
+    #streaming.live()
+
     input_index = input_details[0]['index']
 
     while True:
         ret, frame = cap.read()
+        
 
         image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         image = image.resize((width, height))
