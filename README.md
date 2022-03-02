@@ -8,7 +8,7 @@ Para entender melhor seu funcionamento, veja o seguinte vídeo:
 https://www.youtube.com/watch?v=FpdGG5FnGKM
 
 
-## Funcionamento do Projeto
+## ☕ Funcionamento do Projeto
 
 O fluxograma completo para o robô que segue pessoas pode ser divido nas seguintes quatro partes:
 
@@ -25,3 +25,14 @@ Quando o usuário estiver fora do limite definido como tolerável, serão feitos
 Para controle de quando seguir em frente ou parar, o Y final é utilizado como base. Quando esta coordenada estiver acima dos parâmetros estabelecidos, o robô andará até o Y final ficar a baixo da tolerância.
 
 O manuseio de curvas é feito com base nos parâmetros relacionados ao eixo X. O posicionamento do usuário será estimado utilizando a média entre o X inicial e final, este valor será comparado com os parâmetros de tolerância, caso seja maior o robô virará à esquerda e caso seja menor o robô virará à direita, esses movimentos serão feitos até que a centroide esteja dentro da projeção estipulada.
+
+
+## 🚀 Execute Localmente
+
+Para execultar o projeto em sua placa, siga os seguintes passos utilizando o terminal: 
+
+* Execute o comando `git clone https://github.com/LucasEloi13/Person-Following-Robot-using-Deep-Learning.git` 
+* Vá na pasta bash do repositório usando `cd bash_install`
+* Execute o comando `bash auto_install.sh` e logo após `bash get_pi_requirements.sh`
+
+E por fim, entre na pasta `<human_follower_try>` e execulte o arquivo `<tflite_plus_motor.py>`. 
